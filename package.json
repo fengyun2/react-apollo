@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "poi src/index.js"
+    "start": "react-scripts start",
+    "build": "react-scripts build"
   },
   "keywords": [],
   "author": "",
@@ -17,7 +18,8 @@
     "graphql-tag": "^2.7.3",
     "react": "^16.2.0",
     "react-apollo": "^2.0.4",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "react-scripts": "^1.1.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
@@ -25,8 +27,6 @@
     "eslint-plugin-babel": "^4.1.2",
     "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-react": "^7.6.1",
-    "prettier": "^1.10.2",
-    "poi": "^9.3.10",
-    "poi-plugin-react": "^9.0.1"
+    "prettier": "^1.10.2"
   }
 }
