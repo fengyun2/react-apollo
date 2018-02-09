@@ -32,4 +32,4 @@ TodoSchema.pre("save", function() {
   }
 });
 
-mongoose.model("Todo", TodoSchema);
+mongoose.model("Todo", TodoSchema, 'Todo');

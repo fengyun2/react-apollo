@@ -4,11 +4,11 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
-// import GraphqlRouter from "./router";
-// import "./mongodb";
+require("./mongodb");
 const GraphqlRouter = require("./router");
 
-require("./mongodb");
+// import GraphqlRouter from "./router";
+// import "./mongodb";
 
 // const { makeExecutableSchema } = require('graphql-tools');
 // const schema = require('./schema');

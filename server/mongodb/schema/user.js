@@ -33,4 +33,4 @@ UserSchema.pre("save", function() {
 });
 
 // 建立User数据类型
-mongoose.model("User", UserSchema);
+mongoose.model("User", UserSchema, 'User');
