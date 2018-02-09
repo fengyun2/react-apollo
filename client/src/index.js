@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 // 引入apollo-client
 import { ApolloProvider } from 'react-apollo';
@@ -29,33 +30,41 @@ const client = new ApolloClient({
 //   })
 //   .then(console.log);
 
-client
-  .query({
-    query: gql`
-      {
-        users {
-          id
-          first_name
-          last_name
-          email
-          department
-          country
-          todo_count
-          todos {
-            id
-            title
-            completed
-          }
-        }
-      }
-    `,
-  })
-  .then(console.log);
+// client
+//   .query({
+//     query: gql`
+//       {
+//         users(first_name: "Sonny", last_name: "Read") {
+//           id
+//           first_name
+//           last_name
+//           email
+//           department
+//           country
+//           todo_count
+//           todos {
+//             id
+//             title
+//             completed
+//           }
+//         }
+//         todos {
+//           id
+//           title
+//         }
+//       }
+//     `,
+//   })
+//   .then(console.log)
+//   .catch(err => {
+//     console.log('服务器错误：', err);
+//   });
 ReactDOM.render(
-  <ApolloProvider client={client}>
-    <App />
-  </ApolloProvider>,
-
+  <BrowserRouter>
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
+  </BrowserRouter>,
   document.getElementById('root'),
 );
 registerServiceWorker();
