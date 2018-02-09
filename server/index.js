@@ -1,11 +1,16 @@
 // require('babel-register');
-require('@babel/polyfill');
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const { graphqlExpress, graphiqlExpress } = require('apollo-server-express');
+require("@babel/polyfill");
+const express = require("express");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+
+// import GraphqlRouter from "./router";
+// import "./mongodb";
+const GraphqlRouter = require("./router");
+
+require("./mongodb");
+
 // const { makeExecutableSchema } = require('graphql-tools');
-import schema from './schema';
 // const schema = require('./schema');
 
 // Some fake data
@@ -42,13 +47,12 @@ const app = express();
 app.use(cors());
 // app.use(bodyParser.text({ type: 'application/graphql' }));
 
-// The GraphQL endpoint
-app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
+app.use(bodyParser.json({ limit: "1mb" }));
+app.use(bodyParser.urlencoded({ extended: true, limit: "1mb" }));
 
-// GraphiQL, a visual editor for queries
-app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
+app.use(GraphqlRouter);
 
 // Start the server
 app.listen(4000, () => {
-  console.log('Go to http://localhost:4000/graphiql to run queries!');
+  console.log("Go to http://localhost:4000/graphiql to run queries!");
 });

@@ -8,7 +8,7 @@ const ObjectId = Schema.Types.ObjectId;
 const TodoSchema = new Schema({
   title: String,
   completed: Boolean,
-  userId: {
+  user: {
     type: ObjectId,
     ref: "User"
   },

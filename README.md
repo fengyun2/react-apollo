@@ -4,6 +4,8 @@
 2. [graphql](http://graphql.cn)
 3. [https://github.com/KilroggD/GraphQL-react](https://github.com/KilroggD/GraphQL-react)
 4. [https://github.com/howtographql/react-apollo](https://github.com/howtographql/react-apollo)
+5. [https://juejin.im/post/5a49e5ccf265da430d585cfd](https://juejin.im/post/5a49e5ccf265da430d585cfd)
+6. [https://github.com/naihe138/GraphQL-demo](https://github.com/naihe138/GraphQL-demo)
 
 ## 运行
 
