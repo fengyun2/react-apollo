@@ -8,6 +8,8 @@ import { withApollo } from 'react-apollo';
 
 import { Table } from 'antd';
 
+import SearchInput from './search';
+
 const columns = [
   {
     title: '姓名',
@@ -32,8 +34,8 @@ const columns = [
 ];
 
 const FETCH_USER_LIST = gql`
-  {
-    users(first_name: "Sonny", last_name: "Read") {
+  query TodoAppSchema($first_name: String, $last_name: String) {
+    users(first_name: $first_name, last_name: $last_name) {
       id
       first_name
       last_name
@@ -59,23 +61,36 @@ class UserList extends Component {
     users: [],
     loading: false,
   };
-  fetchUserList = async () => {
+  fetchUserList = async (params = {}) => {
+    this.setState({
+      loading: true,
+    });
     const result = await this.props.client.query({
       query: FETCH_USER_LIST,
+      variables: params,
     });
     const users = result.data.users;
+
     this.setState({
       users,
+      loading: false,
     });
   };
   componentDidMount() {
     this.fetchUserList();
   }
   render() {
-    const { users = [] } = this.state;
+    const { users = [], loading } = this.state;
     return (
       <div className="user_list">
-        <Table columns={columns} dataSource={users} />
+        <header className="header">
+          <SearchInput
+            placeholder="请输入名字"
+            style={{ width: 200 }}
+            onSearch={this.fetchUserList}
+          />
+        </header>
+        <Table columns={columns} dataSource={users} loading={loading} />
       </div>
     );
   }
