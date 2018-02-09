@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import gql from 'graphql-tag';
 import PropTypes from 'prop-types';
 import ApolloClient from 'apollo-client';
+import { Link } from 'react-router-dom';
 
 // 把ApolloClient 作为组件的属性直接访问
 import { withApollo } from 'react-apollo';
@@ -30,6 +31,18 @@ const columns = [
     title: '地区',
     dataIndex: 'country',
     key: 'country',
+  },
+  {
+    title: '操作',
+    dataIndex: '',
+    key: 'operation',
+    render(text, record, index) {
+      return (
+        <Link to={`/todos/${record.id}`} key={index}>
+          查看任务
+        </Link>
+      );
+    },
   },
 ];
 
