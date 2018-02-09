@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Icon, Input, Button } from 'antd';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import './search.css';
 
 const InputGroup = Input.Group;
 
@@ -23,7 +24,7 @@ class SearchInput extends Component {
   };
   handleSearch = () => {
     if (this.props.onSearch) {
-      this.props.onSearch({ first_name: this.state.value });
+      this.props.onSearch({ [this.props.field]: this.state.value });
     }
   };
   render() {
@@ -39,7 +40,6 @@ class SearchInput extends Component {
       <InputGroup className={searchCls} style={this.props.style}>
         <Input
           placeholder={this.props.placeholder || ''}
-          style={{ ...this.props.style }}
           value={this.state.value}
           onChange={this.handleInputChange}
           onFocus={this.handleFocusBlur}
@@ -59,6 +59,7 @@ SearchInput.propTypes = {
   onSearch: PropTypes.func,
   style: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   placeholder: PropTypes.string,
+  field: PropTypes.string.isRequired,
 };
 
 export default SearchInput;
