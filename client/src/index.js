@@ -16,13 +16,36 @@ const client = new ApolloClient({
   link: new HttpLink({ uri: 'http://localhost:4000/graphql' }),
   cache: new InMemoryCache(),
 });
+// client
+//   .query({
+//     query: gql`
+//       {
+//         books {
+//           title
+//           author
+//         }
+//       }
+//     `,
+//   })
+//   .then(console.log);
+
 client
   .query({
     query: gql`
       {
-        books {
-          title
-          author
+        users {
+          id
+          first_name
+          last_name
+          email
+          department
+          country
+          todo_count
+          todos {
+            id
+            title
+            completed
+          }
         }
       }
     `,

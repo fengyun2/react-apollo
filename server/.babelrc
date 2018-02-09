@@ -1,0 +1,14 @@
+{
+  "presets": [
+    ["@babel/preset-env", {
+      "targets": {
+        "node": "current"
+      },
+      "debug": false,
+      "include": [],
+      "useBuiltIns": "entry",
+      "modules": false,
+      "loose": true
+    }]
+  ]
+}
