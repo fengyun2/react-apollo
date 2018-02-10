@@ -47,8 +47,8 @@ const columns = [
 ];
 
 const FETCH_USER_LIST = gql`
-  query TodoAppSchema {
-    users {
+  query TodoAppSchema($first_name: String, $last_name: String) {
+    users(first_name: $first_name, last_name: $last_name) {
       _id
       first_name
       last_name
@@ -88,7 +88,7 @@ class UserList extends Component {
       <div className="user_list">
         <header className="header">
           <SearchInput
-            field="country"
+            field="first_name"
             placeholder="请输入名字"
             style={{ width: 200 }}
             onSearch={this.fetchUserList}

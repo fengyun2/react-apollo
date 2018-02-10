@@ -47,9 +47,26 @@ export const UserType = new GraphQLObjectType({
 // 查询批量用户
 export const users = {
   type: new GraphQLList(UserType),
-  args: {},
+  args: {
+    first_name: {
+      name: 'first_name',
+      type: GraphQLString,
+    },
+    last_name: {
+      name: 'last_name',
+      type: GraphQLString,
+    },
+  },
   resolve(root, params, options) {
-    return User.find({}).exec();
+    const { first_name, last_name } = params;
+    const $where = {};
+    if (first_name) {
+      $where.first_name = first_name;
+    }
+    if (last_name) {
+      $where.last_name = last_name;
+    }
+    return User.find($where).exec();
   },
 };
 
