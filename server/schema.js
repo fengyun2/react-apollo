@@ -97,5 +97,5 @@ const schema = new GraphQLSchema({
   query: TodoQueryRootType,
 });
 
-export default schema;
-// module.exports = schema;
+// export default schema;
+module.exports = schema;

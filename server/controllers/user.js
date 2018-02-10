@@ -3,6 +3,7 @@
 import mongoose from 'mongoose';
 
 const User = mongoose.model('User');
+const Todo = mongoose.model('Todo');
 
 // 保存用户
 export const saveUser = async (req, res) => {

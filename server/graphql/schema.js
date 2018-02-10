@@ -1,17 +1,21 @@
-import { GraphQLSchema, GraphQLObjectType } from "graphql";
+import { GraphQLSchema, GraphQLObjectType } from 'graphql';
 
-import { todo, todos } from "./todo";
-import { user } from "./user";
+import { todo, todos } from './todo';
+import { user, users } from './user';
 
 // 导出全部的GraphQLSchema模块
 
-export default new GraphQLSchema({
+const schema = new GraphQLSchema({
   query: new GraphQLObjectType({
-    name: "TodoAppSchema",
+    name: 'TodoAppSchema',
     fields: {
       todos,
       todo,
-      user
-    }
-  })
+      users,
+      user,
+    },
+  }),
 });
+
+// 注意这里不能用export default导出
+module.exports = schema;

@@ -1,14 +1,14 @@
 import express from 'express';
-const { graphqlExpress, graphiqlExpress } = require('apollo-server-express');
+// const { graphqlExpress, graphiqlExpress } = require('apollo-server-express');
 
-import { saveUser, updateUser, fetchUser } from '../controllers/user';
-import { saveTodo, fetchTodo } from '../controllers/todo';
+import { saveUser, updateUser, delUser, fetchUser } from '../controllers/user';
+import { saveTodo, updateTodo, delTodo, fetchTodo } from '../controllers/todo';
 
-import schema from '../graphql/schema';
+// import schema from '../graphql/schema';
 
 const router = express.Router();
 
-router.get('/', (req, res, next) => {
+router.get('/', (req, res) => {
   res.send({
     success: true,
     data: 'Welcome to Index Page',
@@ -19,19 +19,22 @@ router.get('/', (req, res, next) => {
 router
   .post('/save_user', saveUser)
   .post('/update_user', updateUser)
+  .post('/del_user', delUser)
   .all('/user', fetchUser)
   .post('/save_todo', saveTodo)
+  .post('/update_todo', updateTodo)
+  .post('/del_todo', delTodo)
   .all('/todo', fetchTodo);
 
 // The GraphQL endpoint
-router.all('/graphql', async (req, res, next) => {
-  await graphqlExpress({ schema });
-});
+// router.all('/graphql', () => {
+//   graphqlExpress({ schema });
+// });
 
 // GraphiQL, a visual editor for queries
-router.all('/graphiql', async (req, res, next) => {
-  await graphiqlExpress({ endpointURL: '/graphql' });
-});
+// router.get('/graphiql', () => {
+//   graphiqlExpress({ endpointURL: '/graphql' });
+// });
 
 // export default router;
 module.exports = router;
