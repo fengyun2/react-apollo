@@ -7,7 +7,9 @@ import { Link } from 'react-router-dom';
 // 把ApolloClient 作为组件的属性直接访问
 import { withApollo } from 'react-apollo';
 
-import { Table } from 'antd';
+import { Table, Button, Modal } from 'antd';
+
+import './list.css';
 
 import SearchInput from './search';
 
@@ -86,13 +88,16 @@ class UserList extends Component {
     const { users = [], loading } = this.state;
     return (
       <div className="user_list">
-        <header className="header">
+        <header className="header clearfix">
           <SearchInput
             field="first_name"
             placeholder="请输入名字"
             style={{ width: 200 }}
             onSearch={this.fetchUserList}
           />
+          <div className="add-btn-wrap">
+            <Button type="primary">添加用户</Button>
+          </div>
         </header>
         <Table columns={columns} dataSource={users} loading={loading} />
       </div>

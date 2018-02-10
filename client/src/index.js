@@ -9,6 +9,8 @@ import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 // import gql from 'graphql-tag';
 
+import './index.css';
+
 import App from './App';
 
 import registerServiceWorker from './registerServiceWorker';
