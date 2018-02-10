@@ -1,3 +1,4 @@
+// 这个路由文件只是rest请求，不涉及到graphql,可能随时废弃
 import express from 'express';
 const { graphqlExpress, graphiqlExpress } = require('apollo-server-express');
 
