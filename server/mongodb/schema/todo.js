@@ -1,6 +1,6 @@
 // mongodb/todo.js
 
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 const ObjectId = Schema.Types.ObjectId;
@@ -10,21 +10,21 @@ const TodoSchema = new Schema({
   completed: Boolean,
   user: {
     type: ObjectId,
-    ref: "User"
+    ref: 'User',
   },
   meta: {
     createdAt: {
       type: Date,
-      default: Date.now()
+      default: Date.now(),
     },
     updatedAt: {
       type: Date,
-      default: Date.now()
-    }
-  }
+      default: Date.now(),
+    },
+  },
 });
 
-TodoSchema.pre("save", function() {
+TodoSchema.pre('save', function() {
   if (this.isNew) {
     this.meta.createdAt = this.meta.updatedAt = Date.now();
   } else {
@@ -32,4 +32,4 @@ TodoSchema.pre("save", function() {
   }
 });
 
-mongoose.model("Todo", TodoSchema, 'Todo');
+mongoose.model('Todo', TodoSchema, 'Todo');

@@ -1,5 +1,5 @@
 // mongodb/user.js
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 
@@ -14,17 +14,17 @@ const UserSchema = new Schema({
   meta: {
     createdAt: {
       type: Date,
-      default: Date.now()
+      default: Date.now(),
     },
     updatedAt: {
       type: Date,
-      default: Date.now()
-    }
-  }
+      default: Date.now(),
+    },
+  },
 });
 
 // 在保存数据之前更新日期
-UserSchema.pre("save", function() {
+UserSchema.pre('save', function() {
   if (this.isNew) {
     this.meta.createdAt = this.meta.updatedAt = Date.now();
   } else {
@@ -33,4 +33,4 @@ UserSchema.pre("save", function() {
 });
 
 // 建立User数据类型
-mongoose.model("User", UserSchema, 'User');
+mongoose.model('User', UserSchema, 'User');
