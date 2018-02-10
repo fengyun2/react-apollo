@@ -1,10 +1,11 @@
 import express from 'express';
-// const { graphqlExpress, graphiqlExpress } = require('apollo-server-express');
+const { graphqlExpress, graphiqlExpress } = require('apollo-server-express');
 
 import { saveUser, updateUser, delUser, fetchUser } from '../controllers/user';
 import { saveTodo, updateTodo, delTodo, fetchTodo } from '../controllers/todo';
 
 // import schema from '../graphql/schema';
+const schema = require('../graphql/schema');
 
 const router = express.Router();
 
@@ -27,14 +28,14 @@ router
   .all('/todo', fetchTodo);
 
 // The GraphQL endpoint
-// router.all('/graphql', () => {
-//   graphqlExpress({ schema });
-// });
+router.all('/graphql', async (req, res, next) => {
+  await graphqlExpress({ schema })(req, res, next);
+});
 
 // GraphiQL, a visual editor for queries
-// router.get('/graphiql', () => {
-//   graphiqlExpress({ endpointURL: '/graphql' });
-// });
+router.get('/graphiql', async (req, res, next) => {
+  await graphiqlExpress({ endpointURL: '/graphql' })(req, res, next);
+});
 
 // export default router;
 module.exports = router;

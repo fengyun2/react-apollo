@@ -38,7 +38,7 @@ const columns = [
     key: 'operation',
     render(text, record, index) {
       return (
-        <Link to={`/todos/${record.id}`} key={index}>
+        <Link to={`/todos/${record._id}`} key={index}>
           查看任务
         </Link>
       );
@@ -47,29 +47,15 @@ const columns = [
 ];
 
 const FETCH_USER_LIST = gql`
-  query TodoAppSchema(
-    $first_name: String
-    $last_name: String
-    $country: String
-  ) {
-    users(first_name: $first_name, last_name: $last_name, country: $country) {
-      id
+  query TodoAppSchema {
+    users {
+      _id
       first_name
       last_name
       email
       gender
       department
       country
-      todo_count
-      todos {
-        id
-        title
-        completed
-      }
-    }
-    todos {
-      id
-      title
     }
   }
 `;

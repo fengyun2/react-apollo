@@ -54,9 +54,19 @@ export const TodoType = new GraphQLObjectType({
 // 批量查询
 export const todos = {
   type: new GraphQLList(TodoType),
-  args: {},
+  args: {
+    userId: {
+      name: 'user',
+      type: GraphQLID,
+    },
+  },
   resolve(root, params, options) {
-    return Todo.find({})
+    const { userId } = params;
+    const $where = {};
+    if (userId) {
+      $where.user = userId;
+    }
+    return Todo.find($where)
       .populate({
         path: 'user',
         select: 'id first_name gender country',

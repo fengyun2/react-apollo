@@ -30,28 +30,13 @@ const columns = [
 ];
 
 const FETCH_TODO_LIST = gql`
-  query TodoAppSchema($userId: Int) {
-    users {
-      id
-      first_name
-      last_name
-      email
-      gender
-      department
-      country
-      todo_count
-      todos {
-        id
-        title
-        completed
-      }
-    }
+  query TodoAppSchema($userId: ID) {
     todos(userId: $userId) {
-      id
+      _id
       title
       completed
       user {
-        id
+        _id
         first_name
       }
     }
@@ -86,7 +71,7 @@ class TodoList extends Component {
     }
   };
   componentDidMount() {
-    const userId = parseInt(this.props.match.params.userId, 10);
+    const userId = this.props.match.params.userId;
     this.fetchTodoList({ userId });
   }
   render() {
