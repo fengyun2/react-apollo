@@ -7,11 +7,12 @@ import { Link } from 'react-router-dom';
 // 把ApolloClient 作为组件的属性直接访问
 import { withApollo } from 'react-apollo';
 
-import { Table, Button, Modal } from 'antd';
+import { Table, Button } from 'antd';
 
 import './list.css';
 
 import SearchInput from './search';
+import AddUserForm from './components/addUser';
 
 const columns = [
   {
@@ -65,7 +66,63 @@ class UserList extends Component {
   state = {
     users: [],
     loading: false,
+    addVisible: false,
+    editVisible: false,
   };
+  showAddModal = () => {
+    this.setState({
+      addVisible: true,
+    });
+  };
+  showEditModal = () => {
+    this.setState({
+      editVisible: true,
+    });
+  };
+  handleAddCancel = () => {
+    this.setState({
+      addVisible: false,
+    });
+  };
+  handleEditCancel = () => {
+    this.setState({
+      editVisible: false,
+    });
+  };
+  handleAddCreate = () => {
+    const addForm = this.addForm;
+    addForm.validateFields((err, values) => {
+      if (err) {
+        return;
+      }
+      console.log('Received values of form: ', values);
+      addForm.resetFields();
+      this.setState({
+        addVisible: false,
+      });
+    });
+  };
+  handleEditCreate = () => {
+    const editForm = this.editForm;
+    editForm.validateFields((err, values) => {
+      if (err) {
+        return;
+      }
+      console.log('Received values of form: ', values);
+      editForm.resetFields();
+      this.setState({
+        editVisible: false,
+      });
+    });
+  };
+
+  addFormRef = form => {
+    this.addForm = form;
+  };
+  editFormRef = form => {
+    this.editForm = form;
+  };
+
   fetchUserList = async (params = {}) => {
     this.setState({
       loading: true,
@@ -96,10 +153,18 @@ class UserList extends Component {
             onSearch={this.fetchUserList}
           />
           <div className="add-btn-wrap">
-            <Button type="primary">添加用户</Button>
+            <Button type="primary" onClick={this.showAddModal}>
+              添加用户
+            </Button>
           </div>
         </header>
         <Table columns={columns} dataSource={users} loading={loading} />
+        <AddUserForm
+          ref={this.addFormRef}
+          visible={this.state.addVisible}
+          onCancel={this.handleAddCancel}
+          onCreate={this.handleAddCreate}
+        />
       </div>
     );
   }
