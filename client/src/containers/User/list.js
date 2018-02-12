@@ -51,6 +51,9 @@ const ADD_USER = gql`
       first_name
       last_name
       email
+      gender
+      department
+      country
     }
   }
 `;
