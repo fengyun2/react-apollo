@@ -204,9 +204,9 @@ ansi-styles@^3.0.0, ansi-styles@^3.1.0:
   dependencies:
     color-convert "^1.9.0"
 
-antd@^3.2.0:
-  version "3.2.0"
-  resolved "http://registry.npm.taobao.org/antd/download/antd-3.2.0.tgz#83f2980f1e73a4147dce3d643c749bd8ba91d057"
+antd@3.2.1:
+  version "3.2.1"
+  resolved "http://registry.npm.taobao.org/antd/download/antd-3.2.1.tgz#141d87b61063b58aa1cd392d0bf5fb953e96eeec"
   dependencies:
     array-tree-filter "^2.0.0"
     babel-runtime "6.x"
@@ -216,6 +216,7 @@ antd@^3.2.0:
     dom-closest "^0.2.0"
     enquire.js "^2.1.1"
     lodash.debounce "^4.0.8"
+    lodash.uniqby "^4.7.0"
     moment "^2.19.3"
     omit.js "^1.0.0"
     prop-types "^15.5.7"
@@ -4465,6 +4466,10 @@ lodash.throttle@^4.0.0:
 lodash.uniq@^4.5.0:
   version "4.5.0"
   resolved "http://registry.npm.taobao.org/lodash.uniq/download/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
+
+lodash.uniqby@^4.7.0:
+  version "4.7.0"
+  resolved "http://registry.npm.taobao.org/lodash.uniqby/download/lodash.uniqby-4.7.0.tgz#d99c07a669e9e6d24e1362dfe266c67616af1302"
 
 "lodash@>=3.5 <5", lodash@^4.14.0, lodash@^4.15.0, lodash@^4.16.5, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.0, lodash@^4.3.0:
   version "4.17.5"

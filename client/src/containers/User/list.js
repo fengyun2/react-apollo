@@ -14,41 +14,6 @@ import './list.css';
 import SearchInput from './search';
 import AddUserForm from './components/addUser';
 
-const columns = [
-  {
-    title: '姓名',
-    dataIndex: 'first_name',
-    key: 'first_name',
-  },
-  {
-    title: '邮箱',
-    dataIndex: 'email',
-    key: 'email',
-  },
-  {
-    title: '性别',
-    dataIndex: 'gender',
-    key: 'gender',
-  },
-  {
-    title: '地区',
-    dataIndex: 'country',
-    key: 'country',
-  },
-  {
-    title: '操作',
-    dataIndex: '',
-    key: 'operation',
-    render(text, record, index) {
-      return (
-        <Link to={`/todos/${record._id}`} key={index}>
-          查看任务
-        </Link>
-      );
-    },
-  },
-];
-
 const FETCH_USER_LIST = gql`
   query TodoAppSchema($first_name: String, $last_name: String) {
     users(first_name: $first_name, last_name: $last_name) {
@@ -90,6 +55,15 @@ const ADD_USER = gql`
   }
 `;
 
+const DELETE_USER = gql`
+  mutation Mutation($id: ID!) {
+    delUser(id: $id) {
+      _id
+      first_name
+    }
+  }
+`;
+
 class UserList extends Component {
   state = {
     users: [],
@@ -97,6 +71,45 @@ class UserList extends Component {
     addVisible: false,
     editVisible: false,
   };
+  columns = [
+    {
+      title: '姓名',
+      dataIndex: 'first_name',
+      key: 'first_name',
+    },
+    {
+      title: '邮箱',
+      dataIndex: 'email',
+      key: 'email',
+    },
+    {
+      title: '性别',
+      dataIndex: 'gender',
+      key: 'gender',
+    },
+    {
+      title: '地区',
+      dataIndex: 'country',
+      key: 'country',
+    },
+    {
+      title: '操作',
+      dataIndex: '',
+      key: 'operation',
+      render: (text, record, index) => {
+        return (
+          <span>
+            <Button type="danger" onClick={() => this.delUser(record._id)}>
+              删除
+            </Button>
+            <Link to={`/todos/${record._id}`} key={index}>
+              查看任务
+            </Link>
+          </span>
+        );
+      },
+    },
+  ];
   showAddModal = () => {
     this.setState({
       addVisible: true,
@@ -158,10 +171,34 @@ class UserList extends Component {
       mutation: ADD_USER,
       variables: params,
     });
+    const users = this.state.users;
     this.setState({
-      users: [...this.state.users, result.data.addUser],
+      users: [...users, result.data.addUser],
     });
-    console.log('addUser: ', result);
+  };
+  delUser = async id => {
+    const params = { id };
+    await this.props.client.mutate({
+      mutation: DELETE_USER,
+      variables: params,
+      // eslint-disable-next-line
+      update: (proxy, { data: { delUser } }) => {
+        // Read the data from our cache for this query or from react state
+        console.log(
+          'apollo cache: ',
+          proxy.readQuery({ query: FETCH_USER_LIST }),
+        );
+        const users = [...this.state.users];
+        const index = users.map(item => item._id).indexOf(id);
+        users.splice(index, 1);
+
+        // Write our data back to the cache.
+        // proxy.writeQuery({ query: FETCH_USER_LIST, data });
+        this.setState({
+          users,
+        });
+      },
+    });
   };
   fetchUserList = async (params = {}) => {
     this.setState({
@@ -198,7 +235,7 @@ class UserList extends Component {
             </Button>
           </div>
         </header>
-        <Table columns={columns} dataSource={users} loading={loading} />
+        <Table columns={this.columns} dataSource={users} loading={loading} />
         <AddUserForm
           ref={this.addFormRef}
           visible={this.state.addVisible}

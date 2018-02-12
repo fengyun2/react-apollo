@@ -51,6 +51,7 @@ class TodoList extends Component {
     this.setState({
       loading: true,
     });
+    console.log('params: ', params);
     try {
       const result = await this.props.client.query({
         query: FETCH_TODO_LIST,
