@@ -62,6 +62,34 @@ const FETCH_USER_LIST = gql`
     }
   }
 `;
+
+const ADD_USER = gql`
+  mutation Mutation(
+    $first_name: String!
+    $last_name: String!
+    $email: String!
+    $gender: String
+    $department: String
+    $country: String
+  ) {
+    addUser(
+      data: {
+        first_name: $first_name
+        last_name: $last_name
+        email: $email
+        gender: $gender
+        department: $department
+        country: $country
+      }
+    ) {
+      _id
+      first_name
+      last_name
+      email
+    }
+  }
+`;
+
 class UserList extends Component {
   state = {
     users: [],
@@ -96,6 +124,8 @@ class UserList extends Component {
         return;
       }
       console.log('Received values of form: ', values);
+
+      this.addUser(values);
       addForm.resetFields();
       this.setState({
         addVisible: false,
@@ -109,6 +139,7 @@ class UserList extends Component {
         return;
       }
       console.log('Received values of form: ', values);
+
       editForm.resetFields();
       this.setState({
         editVisible: false,
@@ -122,7 +153,16 @@ class UserList extends Component {
   editFormRef = form => {
     this.editForm = form;
   };
-
+  addUser = async (params = {}) => {
+    const result = await this.props.client.mutate({
+      mutation: ADD_USER,
+      variables: params,
+    });
+    this.setState({
+      users: [...this.state.users, result.data.addUser],
+    });
+    console.log('addUser: ', result);
+  };
   fetchUserList = async (params = {}) => {
     this.setState({
       loading: true,
