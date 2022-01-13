@@ -16,7 +16,7 @@
     "@types/node": "^8.9.1",
     "concurrently": "^3.5.1",
     "minimist": "^1.2.0",
-    "shelljs": "^0.8.1"
+    "shelljs": "^0.8.5"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
