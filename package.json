@@ -15,7 +15,7 @@
   "dependencies": {
     "@types/node": "^8.9.1",
     "concurrently": "^3.5.1",
-    "minimist": "^1.2.0",
+    "minimist": "^1.2.6",
     "shelljs": "^0.8.1"
   },
   "devDependencies": {
