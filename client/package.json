@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "react-app-rewired start",
-    "build": "react-app-rewired build"
+    "build": "react-app-rewired build",
+    "prepare": "yarn run snyk-protect",
+    "snyk-protect": "snyk-protect"
   },
   "keywords": [],
   "author": "",
@@ -19,13 +21,14 @@
     "graphql": "^0.13.0",
     "graphql-tag": "^2.7.3",
     "graphql-tools": "^2.20.2",
-    "prop-types": "^15.6.0",
-    "react": "^16.2.0",
+    "prop-types": "^15.6.2",
+    "react": "^16.5.0",
     "react-apollo": "^2.0.4",
-    "react-dom": "^16.2.0",
+    "react-dom": "^16.5.0",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "^1.1.0"
+    "react-scripts": "^5.0.0",
+    "@snyk/protect": "latest"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
@@ -37,5 +40,6 @@
     "flow-bin": "^0.65.0",
     "prettier": "^1.10.2",
     "react-app-rewired": "^1.4.1"
-  }
+  },
+  "snyk": true
 }
