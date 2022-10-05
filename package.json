@@ -7,7 +7,9 @@
     "start": "concurrently --kill-others \"npm run start-client\" \"npm run start-server\"",
     "start-client": "node index.js --project client",
     "start-server": "node index.js --project server",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "prepare": "yarn run snyk-protect",
+    "snyk-protect": "snyk-protect"
   },
   "keywords": [],
   "author": "",
@@ -15,8 +17,9 @@
   "dependencies": {
     "@types/node": "^8.9.1",
     "concurrently": "^3.5.1",
-    "minimist": "^1.2.0",
-    "shelljs": "^0.8.1"
+    "minimist": "^1.2.6",
+    "shelljs": "^0.8.5",
+    "@snyk/protect": "latest"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
@@ -35,5 +38,6 @@
       "prettier --single-quote --write",
       "git add"
     ]
-  }
+  },
+  "snyk": true
 }
