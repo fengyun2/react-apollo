@@ -19,7 +19,7 @@
     "graphql": "^0.13.0",
     "graphql-tools": "^2.20.2",
     "lodash": "^4.17.5",
-    "mongoose": "^5.0.4"
+    "mongoose": "^5.3.9"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.39",
